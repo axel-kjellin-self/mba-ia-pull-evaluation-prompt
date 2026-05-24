@@ -1,5 +1,11 @@
 # Pull, Otimização e Avaliação de Prompts com LangChain e LangSmith
 
+> **📖 DOCUMENTAÇÃO COMPLETA:** Veja [DOCUMENTACAO.md](./DOCUMENTACAO.md) para o processo completo de otimização realizado (9 iterações), análise detalhada e resultados finais.
+>
+> **✅ VERSÃO OFICIAL:** Prompt v5 (média: 0.8648 / 0.9000) - `prompts/bug_to_user_story_v5.yml`
+
+---
+
 ## Objetivo
 
 Você deve entregar um software capaz de:

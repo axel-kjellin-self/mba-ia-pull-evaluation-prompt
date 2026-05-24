@@ -321,7 +321,7 @@ def main():
         return 1
 
     prompts_to_evaluate = [
-        f"{username}/bug_to_user_story_v2",
+        f"{username}/bug_to_user_story_v5",  # Versão OFICIAL (melhor média: 0.8648)
     ]
 
     all_passed = True

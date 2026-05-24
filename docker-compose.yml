@@ -1,0 +1,24 @@
+services:
+  app:
+    build: .
+    container_name: prompt_optimization_app
+    volumes:
+      - ./src:/app/src
+      - ./prompts:/app/prompts
+      - ./datasets:/app/datasets
+      - ./tests:/app/tests
+      - ./.env:/app/.env
+    environment:
+      - LANGSMITH_TRACING=${LANGSMITH_TRACING:-true}
+      - LANGSMITH_ENDPOINT=${LANGSMITH_ENDPOINT:-https://api.smith.langchain.com}
+      - LANGSMITH_API_KEY=${LANGSMITH_API_KEY}
+      - LANGSMITH_PROJECT=${LANGSMITH_PROJECT:-prompt-optimization-challenge}
+      - USERNAME_LANGSMITH_HUB=${USERNAME_LANGSMITH_HUB}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - LLM_PROVIDER=${LLM_PROVIDER:-google}
+      - LLM_MODEL=${LLM_MODEL:-gemini-2.5-flash}
+      - EVAL_MODEL=${EVAL_MODEL:-gemini-2.5-flash}
+    stdin_open: true
+    tty: true
+    command: bash
