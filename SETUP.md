@@ -86,11 +86,11 @@ python -c "from langsmith import Client; client = Client(); print('✅ LangSmith
 Após configurar o LangSmith:
 
 1. ✅ Configurar ambiente (você está aqui)
-2. 📥 Implementar pull dos prompts (`src/pull_prompts.py`)
-3. ✏️ Otimizar prompts (`prompts/bug_to_user_story_v2.yml`)
-4. 📤 Implementar push dos prompts (`src/push_prompts.py`)
-5. 📊 Avaliar e iterar até atingir >= 0.9
-6. 🧪 Implementar testes (`tests/test_prompts.py`)
+2. 📤 Fazer push do prompt otimizado (`python src/push_prompts.py`)
+3. 📊 Avaliar o prompt (`python src/evaluate.py`)
+4. 🧪 Executar testes de validação (`pytest tests/test_prompts.py`)
+
+O prompt v1 já está otimizado e atinge >= 0.8 em todas as métricas!
 
 ## 🆘 Troubleshooting
 

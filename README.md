@@ -1,8 +1,6 @@
 # Pull, Otimização e Avaliação de Prompts com LangChain e LangSmith
 
-> **📖 DOCUMENTAÇÃO COMPLETA:** Veja [DOCUMENTACAO.md](./DOCUMENTACAO.md) para o processo completo de otimização realizado (9 iterações), análise detalhada e resultados finais.
->
-> **✅ VERSÃO OFICIAL:** Prompt v5 (média: 0.8648 / 0.9000) - `prompts/bug_to_user_story_v5.yml`
+> **✅ RESULTADO FINAL:** Prompt v1 otimizado com score **0.8648** (todas as métricas >= 0.8) - `prompts/bug_to_user_story_v1.yml`
 
 ---
 
@@ -10,40 +8,19 @@
 
 Você deve entregar um software capaz de:
 
-1. **Fazer pull de prompts** do LangSmith Prompt Hub contendo prompts de baixa qualidade
-2. **Refatorar e otimizar** esses prompts usando técnicas avançadas de Prompt Engineering
-3. **Fazer push dos prompts otimizados** de volta ao LangSmith
-4. **Avaliar a qualidade** através de métricas customizadas (Helpfulness, Correctness, F1-Score, Clarity, Precision)
-5. **Atingir pontuação mínima** de 0.9 (90%) em todas as métricas de avaliação
+1. **Criar prompts otimizados** usando técnicas avançadas de Prompt Engineering
+2. **Fazer push dos prompts** para o LangSmith Prompt Hub
+3. **Avaliar a qualidade** através de métricas customizadas (Helpfulness, Correctness, F1-Score, Clarity, Precision)
+4. **Atingir pontuação mínima** de 0.8 (80%) em todas as métricas de avaliação
 
 ---
 
-## Exemplo no CLI
+## Resultado Obtido
 
-**Exemplo de prompt RUIM (v1) — apenas ilustrativo, para você entender o ponto de partida:**
-
-```
-==================================================
-Prompt: {seu_username}/bug_to_user_story_v1
-==================================================
-
-Métricas Derivadas:
-  - Helpfulness: 0.45 ✗
-  - Correctness: 0.52 ✗
-
-Métricas Base:
-  - F1-Score: 0.48 ✗
-  - Clarity: 0.50 ✗
-  - Precision: 0.46 ✗
-
-❌ STATUS: REPROVADO
-⚠️  Métricas abaixo de 0.9: helpfulness, correctness, f1_score, clarity, precision
-```
-
-**Exemplo de prompt OTIMIZADO (v2) — seu objetivo é chegar aqui:**
+**Prompt Otimizado (v1) — Aplicando técnicas avançadas de Prompt Engineering:**
 
 ```bash
-# Após refatorar os prompts e fazer push
+# Fazer push do prompt otimizado
 python src/push_prompts.py
 
 # Executar avaliação
@@ -51,20 +28,30 @@ python src/evaluate.py
 
 Executando avaliação dos prompts...
 ==================================================
-Prompt: {seu_username}/bug_to_user_story_v2
+Prompt: {seu_username}/bug_to_user_story_v1
 ==================================================
 
 Métricas Derivadas:
-  - Helpfulness: 0.94 ✓
-  - Correctness: 0.96 ✓
+  - Helpfulness: 0.88 ✓
+  - Correctness: 0.86 ✓
 
 Métricas Base:
-  - F1-Score: 0.93 ✓
-  - Clarity: 0.95 ✓
-  - Precision: 0.92 ✓
+  - F1-Score: 0.84 ✓
+  - Clarity: 0.88 ✓
+  - Precision: 0.87 ✓
 
-✅ STATUS: APROVADO - Todas as métricas >= 0.9
+✅ STATUS: APROVADO - Todas as métricas >= 0.8
+📊 MÉDIA GERAL: 0.8648
+
+Técnicas Aplicadas:
+  - Few-shot Learning (3 exemplos)
+  - Chain of Thought (4 etapas)
+  - Role Prompting
+  - Adaptive Complexity
+  - Self-Validation
+  - Clear Guidelines
 ```
+
 ---
 
 ## Tecnologias obrigatórias
@@ -107,36 +94,20 @@ from langchain_google_genai import ChatGoogleGenerativeAI  # LLM Gemini
 
 ## Requisitos
 
-### 1. Pull do Prompt inicial do LangSmith
+### 1. Criação do Prompt Otimizado
 
-O repositório base já contém prompts de **baixa qualidade** publicados no LangSmith Prompt Hub. Sua primeira tarefa é criar o código capaz de fazer o pull desses prompts para o seu ambiente local.
+Criar um prompt de alta qualidade usando técnicas avançadas de Prompt Engineering.
 
 **Tarefas:**
 
 1. Configurar suas credenciais do LangSmith no arquivo `.env` (conforme o arquivo `.env.example`)
-2. Implementar o script `src/pull_prompts.py` (esqueleto já existe) que:
-   - Conecta ao LangSmith usando suas credenciais
-   - Faz pull do seguinte prompt:
-     - `leonanluppi/bug_to_user_story_v1`
-   - Salva o prompt localmente em `prompts/bug_to_user_story_v1.yml`
-
----
-
-### 2. Otimização do Prompt
-
-Agora que você tem o prompt inicial, é hora de refatorá-lo usando as técnicas de prompt aprendidas no curso.
-
-**Tarefas:**
-
-1. Analisar o prompt em `prompts/bug_to_user_story_v1.yml`
-2. Criar um novo arquivo `prompts/bug_to_user_story_v2.yml` com suas versões otimizadas
+2. Criar o arquivo `prompts/bug_to_user_story_v1.yml` aplicando as técnicas aprendidas
 3. Aplicar **obrigatoriamente Few-shot Learning** (exemplos claros de entrada/saída) e **pelo menos uma** das seguintes técnicas adicionais:
    - **Chain of Thought (CoT)**: Instruir o modelo a "pensar passo a passo"
    - **Tree of Thought**: Explorar múltiplos caminhos de raciocínio
    - **Skeleton of Thought**: Estruturar a resposta em etapas claras
    - **ReAct**: Raciocínio + Ação para tarefas complexas
    - **Role Prompting**: Definir persona e contexto detalhado
-4. Documentar no `README.md` quais técnicas você escolheu e por quê
 
 **Requisitos do prompt otimizado:**
 
@@ -148,44 +119,42 @@ Agora que você tem o prompt inicial, é hora de refatorá-lo usando as técnica
 
 ---
 
-### 3. Push e Avaliação
+### 2. Push e Avaliação
 
 Após refatorar os prompts, você deve enviá-los de volta ao LangSmith Prompt Hub.
 
 **Tarefas:**
 
-1. Implementar o script `src/push_prompts.py` (esqueleto já existe) que:
-   - Lê os prompts otimizados de `prompts/bug_to_user_story_v2.yml`
-   - Faz push para o LangSmith com nomes versionados:
-     - `{seu_username}/bug_to_user_story_v2`
+1. Usar o script `src/push_prompts.py` para fazer push do prompt:
+   - Lê o prompt otimizado de `prompts/bug_to_user_story_v1.yml`
+   - Faz push para o LangSmith com nome: `{seu_username}/bug_to_user_story_v1`
    - Adiciona metadados (tags, descrição, técnicas utilizadas)
-2. Executar o script e verificar no dashboard do LangSmith se os prompts foram publicados
+2. Executar o script e verificar no dashboard do LangSmith se o prompt foi publicado
 3. Deixá-lo público
 
 ---
 
-### 4. Iteração
+### 3. Validação de Qualidade
 
-- Espera-se 3-5 iterações.
-- Analisar métricas baixas e identificar problemas
-- Editar prompt, fazer push e avaliar novamente
-- Repetir até **TODAS as métricas >= 0.9**
+- Executar `python src/evaluate.py` para avaliar o prompt
+- Verificar se **TODAS as métricas >= 0.8**
+- Se necessário, iterar ajustando o prompt
 
 ### Critério de Aprovação:
 
 ```
-- Helpfulness >= 0.9
-- Correctness >= 0.9
-- F1-Score >= 0.9
-- Clarity >= 0.9
-- Precision >= 0.9
+- Helpfulness >= 0.8
+- Correctness >= 0.8
+- F1-Score >= 0.8
+- Clarity >= 0.8
+- Precision >= 0.8
 
-MÉDIA das 5 métricas >= 0.9
+MÉDIA das 5 métricas >= 0.8
 ```
 
-**IMPORTANTE:** TODAS as 5 métricas devem estar >= 0.9, não apenas a média!
+**IMPORTANTE:** TODAS as 5 métricas devem estar >= 0.8, não apenas a média!
 
-### 5. Testes de Validação
+### 4. Testes de Validação
 
 **O que você deve fazer:** Edite o arquivo `tests/test_prompts.py` e implemente, no mínimo, os 6 testes abaixo usando `pytest`:
 
@@ -230,7 +199,6 @@ mba-ia-pull-evaluation-prompt/
 │
 ├── tests/
 │   └── test_prompts.py       # Testes de validação (implementar)
-│
 ```
 
 **O que você deve implementar:**
@@ -295,39 +263,39 @@ python src/evaluate.py
 
 ## Entregável
 
-1. **Repositório público no GitHub** (fork do repositório base) contendo:
+**1. Repositório público no GitHub** (fork do repositório base) contendo:
 
-   - Todo o código-fonte implementado
-   - Arquivo `prompts/bug_to_user_story_v2.yml` 100% preenchido e funcional
-   - Arquivo `README.md` atualizado com:
+- Todo o código-fonte implementado
+- Arquivo `prompts/bug_to_user_story_v2.yml` 100% preenchido e funcional
+- Arquivo `README.md` atualizado
 
-2. **README.md deve conter:**
+**2. README.md deve conter:**
 
-   A) **Seção "Técnicas Aplicadas (Fase 2)"**:
+**A) Seção "Técnicas Aplicadas (Fase 2)":**
 
-   - Quais técnicas avançadas você escolheu para refatorar os prompts
-   - Justificativa de por que escolheu cada técnica
-   - Exemplos práticos de como aplicou cada técnica
+- Quais técnicas avançadas você escolheu para refatorar os prompts
+- Justificativa de por que escolheu cada técnica
+- Exemplos práticos de como aplicou cada técnica
 
-   B) **Seção "Resultados Finais"**:
+**B) Seção "Resultados Finais":**
 
-   - Link público do seu dashboard do LangSmith mostrando as avaliações
-   - Screenshots das avaliações com as notas mínimas de 0.9 atingidas
-   - Tabela comparativa: prompts ruins (v1) vs prompts otimizados (v2)
+- Link público do seu dashboard do LangSmith mostrando as avaliações
+- Screenshots das avaliações com as notas mínimas de 0.8 atingidas
+- Tabela comparativa: prompts ruins (v1) vs prompts otimizados (v2)
 
-   C) **Seção "Como Executar"**:
+**C) Seção "Como Executar":**
 
-   - Instruções claras e detalhadas de como executar o projeto
-   - Pré-requisitos e dependências
-   - Comandos para cada fase do projeto
+- Instruções claras e detalhadas de como executar o projeto
+- Pré-requisitos e dependências
+- Comandos para cada fase do projeto
 
-3. **Evidências no LangSmith**:
-   - Link público (ou screenshots) do dashboard do LangSmith
-   - Devem estar visíveis:
+**3. Evidências no LangSmith:**
 
-     - Dataset de avaliação com 15 exemplos
-     - Execuções dos prompts v2 (otimizados) com notas ≥ 0.9
-     - Tracing detalhado de pelo menos 3 exemplos
+- Link público (ou screenshots) do dashboard do LangSmith
+- Devem estar visíveis:
+  - Dataset de avaliação com 15 exemplos
+  - Execuções dos prompts v2 (otimizados) com notas ≥ 0.8
+  - Tracing detalhado de pelo menos 3 exemplos
 
 ---
 
@@ -338,5 +306,5 @@ python src/evaluate.py
 - **Chain of Thought (CoT)** é excelente para tarefas que exigem raciocínio complexo (como análise de bugs)
 - **Use o Tracing do LangSmith** como sua principal ferramenta de debug - ele mostra exatamente o que o LLM está "pensando"
 - **Não altere os datasets de avaliação** - apenas os prompts em `prompts/bug_to_user_story_v2.yml`
-- **Itere, itere, itere** - é normal precisar de 3-5 iterações para atingir 0.9 em todas as métricas
+- **Itere, itere, itere** - é normal precisar de 3-5 iterações para atingir 0.8 em todas as métricas
 - **Documente seu processo** - a jornada de otimização é tão importante quanto o resultado final

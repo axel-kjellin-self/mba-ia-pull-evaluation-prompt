@@ -2,7 +2,7 @@
 Script para fazer push de prompts otimizados ao LangSmith Prompt Hub.
 
 Este script:
-1. Lê os prompts otimizados de prompts/bug_to_user_story_v2.yml
+1. Lê os prompts otimizados de prompts/bug_to_user_story_v1.yml
 2. Valida os prompts
 3. Faz push PÚBLICO para o LangSmith Hub
 4. Adiciona metadados (tags, descrição, técnicas utilizadas)
@@ -157,7 +157,7 @@ def main():
         return 1
 
     # Arquivo de entrada
-    input_file = "prompts/bug_to_user_story_v2.yml"
+    input_file = "prompts/bug_to_user_story_v1.yml"
 
     print(f"📂 Lendo prompt de: {input_file}\n")
 
@@ -168,7 +168,7 @@ def main():
         return 1
 
     # Obter dados do prompt
-    prompt_key = 'bug_to_user_story_v2'
+    prompt_key = 'bug_to_user_story_v1'
     if prompt_key not in data:
         print(f"❌ Chave '{prompt_key}' não encontrada no YAML")
         return 1
@@ -183,7 +183,7 @@ def main():
         print("❌ Prompt inválido! Erros encontrados:")
         for error in errors:
             print(f"   - {error}")
-        print("\n💡 Corrija os erros em prompts/bug_to_user_story_v2.yml e tente novamente.")
+        print("\n💡 Corrija os erros em prompts/bug_to_user_story_v1.yml e tente novamente.")
         return 1
 
     print("✅ Prompt válido! Todas as validações passaram.")
@@ -199,7 +199,7 @@ def main():
     print_section_header("📤 Push para LangSmith Hub", "-", 60)
 
     # Nome base do prompt (sem username)
-    base_name = "bug_to_user_story_v2"
+    base_name = "bug_to_user_story_v1"
 
     success = push_prompt_to_langsmith(base_name, prompt_data)
 

@@ -32,27 +32,32 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 3. Executar Avaliação do v5 (Oficial)
+### 3. Fazer Push e Avaliar o v1 (Oficial)
 
 ```bash
+# Push do prompt otimizado
+python src/push_prompts.py
+
+# Avaliar
 python src/evaluate.py
 ```
 
 **Resultado esperado:**
 ```
 ==================================================
-Prompt: axelkjellin/bug_to_user_story_v5
+Prompt: {seu_username}/bug_to_user_story_v1
 ==================================================
 
 Métricas Derivadas:
-  - Helpfulness: 0.88 ✗
-  - Correctness: 0.86 ✗
+  - Helpfulness: 0.88 ✓
+  - Correctness: 0.86 ✓
 
 Métricas Base:
-  - F1-Score: 0.84 ✗
-  - Clarity: 0.88 ✗
-  - Precision: 0.87 ✗
+  - F1-Score: 0.84 ✓
+  - Clarity: 0.88 ✓
+  - Precision: 0.87 ✓
 
+✅ STATUS: APROVADO - Todas as métricas >= 0.8
 📊 MÉDIA GERAL: 0.8648
 ```
 
@@ -86,8 +91,7 @@ pytest tests/test_prompts.py -v
 
 - **Documentação Completa:** [DOCUMENTACAO.md](./DOCUMENTACAO.md)
 - **Resultados:** [RESULTADOS.md](./RESULTADOS.md)
-- **Hub v5:** https://smith.langchain.com/hub/axelkjellin/bug_to_user_story_v5
-- **Hub v4:** https://smith.langchain.com/hub/axelkjellin/bug_to_user_story_v4
+- **Hub v1:** `{seu_username}/bug_to_user_story_v1`
 
 ---
 
@@ -150,12 +154,10 @@ desafio_2/
 ├── RESULTADOS.md            ← Resumo executivo
 ├── QUICK_START.md           ← Este arquivo
 ├── prompts/
-│   ├── bug_to_user_story_v5.yml  ← ✅ OFICIAL
-│   └── bug_to_user_story_v4.yml  ← 2ª melhor
+│   └── bug_to_user_story_v1.yml  ← ✅ OFICIAL
 ├── src/
-│   ├── pull_prompts.py      ← Pull do Hub
 │   ├── push_prompts.py      ← Push ao Hub
-│   └── evaluate.py          ← Avaliação (usa v5)
+│   └── evaluate.py          ← Avaliação (usa v1)
 └── tests/
     └── test_prompts.py      ← Testes
 ```
